@@ -30,8 +30,6 @@ st.markdown(
 
 row1 = st.columns([0.9, 0.1])
 
-with row1[0]:
-    st.write("Abinism explanations to write later")
 
 with row1[1]:
     st.page_link(page="pages/dashboard.py",
