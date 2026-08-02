@@ -16,7 +16,7 @@ from utils import *
 # ------------- Loading the data -------------
 # --------------------------------------------
 
-data = load_data("Web application/data/full_cleaned_dataset.csv")
+data = load_data("data/full_cleaned_dataset.csv")
 
 data_to_use = data.copy()
 
