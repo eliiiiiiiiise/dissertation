@@ -9,7 +9,7 @@ from utils import home_page_cards, load_data
 # ------------- Downloading the data -------------
 # ------------------------------------------------
 
-data = load_data("Web application/data/full_cleaned_dataset.csv")
+data = load_data("data/full_cleaned_dataset.csv")
 
 
 st.set_page_config(page_title="Home Page",
