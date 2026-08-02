@@ -1,5 +1,0 @@
-streamlit==1.60.0
-pandas==3.0.3
-numpy==2.5.1
-bm25s==0.3.10
-plotly==6.9.0
