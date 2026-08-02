@@ -14,6 +14,8 @@ def load_data(file):
 
     data = pd.read_csv(file)
 
+
+
     data['theme'] = data["theme"].apply(ast.literal_eval)
     data['country'] = data["country"].apply(ast.literal_eval)
 
@@ -259,6 +261,7 @@ def show_country_detail(country, df):
 
     # number of lines 
     selected_data = df[df['country'].apply(lambda x: country in x)]
+
     st.write(f"{len(selected_data)} human rights violations found")
 
     # bar chart
@@ -286,6 +289,11 @@ def show_country_detail(country, df):
     )
     st.plotly_chart(fig)
 
+def get_country_data(country, df):
+
+    selected_data = df[df['country'].apply(lambda x: country in x)]
+
+    return selected_data
 
 
 

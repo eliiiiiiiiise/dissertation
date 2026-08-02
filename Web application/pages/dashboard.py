@@ -74,15 +74,19 @@ with main_row[0]:
     points = event.selection.points
 
     if points:
+
+        country = points[0]["location"]
+
         show_country_detail(
-            points[0]["location"],
+            country,
             data_to_use
         )
+        st.write(f"{country} was selected, click on the country again to view the full map")
+
+        data_to_use = get_country_data(country, data_to_use)
+        
     else:
         pass
-
-    
-    
 
 
 # ------------- Right row -------------
