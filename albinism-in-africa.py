@@ -13,7 +13,8 @@ data = load_data("data/full_cleaned_dataset.csv")
 
 
 st.set_page_config(page_title="Home Page",
-                   layout="wide")
+                   layout="wide",
+                   initial_sidebar_state="collapsed")
 
 
 # ------------- First row : title -------------
