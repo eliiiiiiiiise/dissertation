@@ -6,7 +6,6 @@ import html
 import bm25s
 import json
 from urllib.request import urlopen
-import plotly.express as px
 
 
 def load_data(file):
