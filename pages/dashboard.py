@@ -6,7 +6,6 @@ import bm25s
 import json
 from urllib.request import urlopen
 import plotly.express as px
-from streamlit_plotly_events import plotly_events
 
 
 import streamlit as st
