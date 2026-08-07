@@ -52,7 +52,7 @@ with row2[0]:
     home_page_cards(title=str(n_documents_analysed),
                     text="Documents analysed",
                     width="90%",
-                    height="100px",
+                    height="70px",
                     background_color="#f29e62")
 
 with row2[1]:
@@ -62,7 +62,7 @@ with row2[1]:
     home_page_cards(title=str(n_human_rights_violations),
                     text="Human rights violations found",
                     width="90%",
-                    height="100px",
+                    height="70px",
                     background_color="#f29e62")
 
 
@@ -80,7 +80,7 @@ with row3[0]:
     home_page_cards(title=str(n_right_to_life),
                     text="Human rights violations related to the right to life",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 with row3[1]:
@@ -90,7 +90,7 @@ with row3[1]:
     home_page_cards(title=str(n_access_to_justice),
                     text="Human rights violations related to access to justice",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 with row3[2]:
@@ -100,7 +100,7 @@ with row3[2]:
     home_page_cards(title=str(n_right_to_education),
                     text="Human rights violations related to the right to education",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 with row3[3]:
 
@@ -109,7 +109,7 @@ with row3[3]:
     home_page_cards(title=str(n_right_to_work),
                     text="Human rights violations related to the right to work",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 st.space("xsmall")
@@ -123,7 +123,7 @@ with row4[0]:
     home_page_cards(title=str(n_adequate_standard_of_living),
                     text="Human rights violations related to adequate standards of living",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 with row4[1]:
@@ -133,7 +133,7 @@ with row4[1]:
     home_page_cards(title=str(n_right_to_health),
                     text="Human rights violations related to the right to health",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 with row4[2]:
@@ -143,7 +143,7 @@ with row4[2]:
     home_page_cards(title=n_others,
                     text="Other types of human rights violations",
                     width="90%",
-                    height="150px",
+                    height="100px",
                     background_color="#f4c6a5")
 
 

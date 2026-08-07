@@ -25,6 +25,30 @@ data_to_use = data.copy()
 st.set_page_config(page_title="Dashboard",
                    layout="wide")
 
+# ------------- Initialising session state variables -------------
+# ----------------------------------------------------------------
+
+option_map = return_theme_options(data)
+
+if 'selection' not in st.session_state:
+    st.session_state['selection'] = []
+
+if 'query' not in st.session_state:
+    st.session_state['query'] = None
+
+# filtering the data
+
+if st.session_state['selection'] != []:
+    data_to_use = return_theme_selection(data_to_use, st.session_state['selection'])
+
+if len(data_to_use):
+    # getting the retriever object based on the options that were selected above
+    retriever = load_index(data_to_use)
+
+    if st.session_state['query']:
+        data_to_use = search_documents(query=st.session_state['query'], df=data_to_use, retriever=retriever)
+
+
 # ------------- First row : title -------------
 # ---------------------------------------------
 
@@ -48,17 +72,14 @@ with main_row[0]:
 
     # choosing themes
 
-    option_map = return_theme_options(data_to_use)
-
     selection = st.pills(
         label="Select the themes you want to see displayed",
         options=option_map.keys(),
         selection_mode="multi",
         format_func=lambda option: option_map[option],
-        default=option_map.keys()
+        default=st.session_state['selection'],
+        key="selection"
         )
-
-    data_to_use = return_theme_selection(data_to_use, selection)
 
     # map
     countries = load_africa_geojson()
@@ -67,25 +88,8 @@ with main_row[0]:
 
     fig = plot_map(data_to_plot, countries)
 
-    event = st.plotly_chart(fig,
-                            on_select="rerun")
+    st.plotly_chart(fig)
 
-    points = event.selection.points
-
-    if points:
-
-        country = points[0]["location"]
-
-        show_country_detail(
-            country,
-            data_to_use
-        )
-        st.write(f"{country} was selected, click on the country again to view the full map")
-
-        data_to_use = get_country_data(country, data_to_use)
-        
-    else:
-        pass
 
 
 # ------------- Right row -------------
@@ -99,18 +103,11 @@ with main_row[1]:
     query = st.text_input(
         "Search extracts",
         icon=":material/search:",
-        placeholder="Enter keywords..."
+        placeholder="Enter keywords...",
+        key="query"
     )
 
     if len(data_to_use) > 0:
-
-        # getting the retriever object based on the options that were selected above
-        retriever = load_index(data_to_use)
-
-        if query:
-
-            data_to_use = search_documents(query=query, df=data_to_use, retriever=retriever)
-
         # number of rows displayed
         st.badge(f"{len(data_to_use)} rows displayed below", color="gray")
 

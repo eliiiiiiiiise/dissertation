@@ -38,8 +38,14 @@ def home_page_cards(title, text, width="100%", height="120px", background_color=
                 background:{background_color};
                 text-align:center;
             ">
-            <h2>{title}</h2>
-            <p>{text}</p>
+                <div style="
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin: 5px;
+                ">
+                    {title}
+                </div>
+                <p>{text}</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -66,6 +72,8 @@ def scrollable_results(results):
 
         date = row['date']
 
+        url = row['url']
+
         if not date:
             date = "No date found for this extract"
 
@@ -76,6 +84,7 @@ def scrollable_results(results):
             <p><strong>Author</strong>: {authors}</p>
             <p><strong>Date</strong>: {date}</p>
             <p><strong>Extract</strong>: {extract}</p>
+            <a href={url} target="_blank">See the full document</a>
         </div>
         """
 
@@ -103,6 +112,11 @@ def scrollable_results(results):
         }}
 
         .card p {{
+            font-size: 12px;
+            text-align: justified;
+        }}
+
+        .card a {{
             font-size: 12px;
             text-align: justified;
         }}
@@ -156,6 +170,13 @@ def search_documents(query, df, retriever):
             results_to_keep.append(result)
 
     searched_df = df[df['extract'].apply(lambda x: x in results_to_keep)]
+
+    # correctly ordering the dataframe
+    order = {result: i for i, result in enumerate(results_to_keep)}
+
+    searched_df['order'] = searched_df['extract'].apply(lambda x: order[x])
+    searched_df = searched_df.sort_values('order').drop(columns='order')
+
 
     return searched_df
 
@@ -253,55 +274,4 @@ def return_theme_selection(df, selection):
                                                 or x == [])]
 
     return df_selected
-
-@st.dialog("Country details")
-def show_country_detail(country, df):
-    # header: name of the selected country
-    st.header(f"Selected country: {country}")
-
-    # number of lines 
-    selected_data = df[df['country'].apply(lambda x: country in x)]
-
-    st.write(f"{len(selected_data)} human rights violations found")
-
-    # bar chart
-    selected_data_to_plot = (
-        selected_data['theme']
-        .explode()
-        .value_counts()
-        .reset_index(name="count")
-        )
-
-    fig = px.bar(selected_data_to_plot, x="count", y="theme")
-
-    fig.update_traces(marker_color="orange",
-                      hovertemplate=
-                                  "<b>%{y}</b><br>" +
-                                  "%{x} human rights violations found<br>" +
-                                  "<extra></extra>")
-
-    fig.update_layout(
-        yaxis=dict(
-            tickangle=-45,
-            title=""
-        ),
-        xaxis=dict(title="Count")
-    )
-    st.plotly_chart(fig)
-
-def get_country_data(country, df):
-
-    selected_data = df[df['country'].apply(lambda x: country in x)]
-
-    return selected_data
-
-
-
-
-
-
-
-    
-
-
 
