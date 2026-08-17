@@ -34,7 +34,7 @@ row1 = st.columns([0.9, 0.1])
 
 with row1[1]:
     st.page_link(page="pages/dashboard.py",
-                     label="See more",
+                     label=":orange-background[See more]",
                      icon=":material/arrow_forward:")
 
 st.space("small")
