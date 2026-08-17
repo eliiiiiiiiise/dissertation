@@ -88,6 +88,8 @@ with main_row[0]:
 
     fig = plot_map(data_to_plot, countries)
 
+    st.write("Hover over countries for more information!")
+
     st.plotly_chart(fig)
 
 
@@ -103,7 +105,7 @@ with main_row[1]:
     query = st.text_input(
         "Search extracts",
         icon=":material/search:",
-        placeholder="Enter keywords...",
+        placeholder="Enter keywords (examples: discrimination, killing, sun exposure)",
         key="query"
     )
 
